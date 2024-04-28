@@ -1,0 +1,68 @@
+<div class="container">
+    <br>
+  
+    <h2>Application de gestion de tâches</h2>
+  
+    <!--   creation du forulaire-->
+  
+    <form action="" name="todoForm">
+  
+        <br>
+        <div class="form-group">
+            <label class="pb-2"  for="title">Titre</label>
+            <input type="text" [(ngModel)]="title" name="title" class="form-control" id="title">
+        </div>
+        
+        <br>
+        <!--<div class="form-group">
+            <label class="pb-2" for="todoTitle">Titre</label>
+            <input type="text" name="todoTitle" class="form-control" id="todoTitle">
+        </div>-->
+
+        <br>
+        <div class="form-group pb-4">
+            <label class="pb-2"   for="comment">Description</label>
+            <textarea rows="5" name="comment" [(ngModel)]="comment" class="form-control" id="comment"></textarea>
+        </div>
+
+        <br>
+        <button (click)="onSubmit()" type="submit" class="btn btn-primary">Soumettre</button>
+  
+    </form>
+
+    <br>
+     <pre> Titre : {{ title | json }}</pre>
+     <br>
+     <pre> Commentaire : {{ comment | json }}</pre>
+
+
+     <br>
+     <br>
+
+     <!--- tableau-->
+     <table class="table table-bordered">
+
+        <thead>
+            <tr>
+                <td>id</td>
+                <td>Titre</td>
+                <td>Commentaire</td>
+                <td>Status</td>
+            </tr>
+        </thead>
+        <tbody>
+            @for (todo of todos; track todo.title; let i = $index ) {
+                <tr>
+                    <td [ngClass]="{'active':todo.enabled == true, 'end': todo.enabled == false}">{{ i+1 }}</td>
+                    <td [ngClass]="{'active':todo.enabled == true, 'end': todo.enabled == false}" >{{ todo.title }}</td>
+                    <td [ngClass]="{'active':todo.enabled == true, 'end': todo.enabled == false}" >{{ todo.comment }}</td>
+                    <td><button (click)="close(todo.id)" class="btn btn-primary"> Cloturer</button></td>
+
+
+                </tr>
+            }
+        </tbody>
+
+     </table>
+  
+  </div>
